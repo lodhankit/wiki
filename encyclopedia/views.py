@@ -34,13 +34,15 @@ def index(request):
     else:
         title = request.POST.get(name_list[1])
         content = request.POST.get(name_list[2])
-        util.save_entry(title,content)
-        if(title not in new_set):
-            new_list.append(title)
-        return render(request,'encyclopedia/index.html',{
-            "entries": new_list,
-        })
-
+        if(title != '' and content != ''):
+            util.save_entry(title,content)
+            link = f'\{title}'
+            if(title not in new_set):
+                new_list.append(title)
+                new_set.add(title)
+            return HttpResponseRedirect(link)
+        else:
+            return HttpResponseRedirect('/')
 
 def details(request, title):
     filename = f"entries/{title}.md"

@@ -1,18 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            add new pages
-        </title>
-    </head>
-    <body>
-        <form action="{% url 'index' %}" method="post">
-            {% csrf_token %}
-            <p>Enter the title of the page below:</p>
-            <textarea name="title">{{ title }}</textarea>
-            <p>Enter the markdown content of the page below:</p>
-            <textarea name="content">{{ content }}</textarea>
-            <input type="submit" value="Save">
-        </form>
-    </body>
+
+<head>
+    <title>
+        add new pages
+    </title>
+    <link rel="stylesheet" href="{% static 'encyclopedia/add.css' %}">
+</head>
+
+<body>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <p class="text">Enter the title of the page below:</p>
+            <textarea style="height:100px; width:1000px; font-size: 20px;" name="title">{{ title }}</textarea>
+            <p class="text">Enter the markdown content of the page below:</p>
+            <textarea style="height:300px; width:1000px; font-size:16px" name="content">{{ content }}</textarea>
+        </div>
+        <input class="btn" type="submit" value="Save">
+    </form>
+</body>
+
 </html>
